@@ -1,0 +1,52 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+
+repositories {
+	mavenCentral()
+}
+
+// Maven
+
+group = 'org.lateralgm.joshedit'
+version = '1.0.0'
+sourceCompatibility = '1.8'
+
+def pomLicenses = {
+	license {
+		name 'GNU General Public License (GPL) v3'
+		url 'http://www.gnu.org/licenses/gpl.html'
+	}
+}
+
+def pomGeneratorLocal = {
+	pom.project {
+		licenses pomLicenses
+		version "$version-SNAPSHOT"
+	}
+}
+
+def pomGenerator = {
+	pom.project {
+		licenses pomLicenses
+	}
+}
+
+install {
+	repositories.mavenInstaller pomGeneratorLocal
+}
+
+uploadArchives {
+	repositories.mavenDeployer pomGenerator
+}
+
+// Gradle Wrapper
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '3.0'
+}
