@@ -4,7 +4,12 @@
 .DS_Store
 
 build/
+classes/
 
 .gradle/
 .idea/
 *.iml
+
+.settings/
+.project
+.classpath
